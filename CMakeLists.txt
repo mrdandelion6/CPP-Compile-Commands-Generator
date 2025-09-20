@@ -49,10 +49,10 @@ else()
 
     set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # this command creates the json file
 
-    add_custom_command(TARGET gemm POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_BINARY_DIR}/compile_commands.json
-        ${CMAKE_SOURCE_DIR}/compile_commands.json
-    COMMENT "Copying compile_commands.json to project root"
+    add_custom_target(copy_compile_commands ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_BINARY_DIR}/compile_commands.json
+            ${CMAKE_SOURCE_DIR}/compile_commands.json
+        COMMENT "Copying compile_commands.json to project root"
     )
 endif()
